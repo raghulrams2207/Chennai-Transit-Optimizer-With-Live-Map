@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#07111f">
+    <title>Booking Confirmed · Chennai Transit</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="app-shell">
+<header class="topbar">
+    <a class="brand" href="/">
+        <span class="brand-mark">CT</span>
+        <span><strong>Chennai Transit</strong><small>Route Optimizer</small></span>
+    </a>
+    <div class="topbar-badge success-badge"><span class="status-dot"></span> Booking confirmed</div>
+</header>
+
+<main class="success-page">
+    <section class="success-card">
+        <div class="success-ring">✓</div>
+        <span class="section-kicker">JOURNEY RESERVED</span>
+        <h1>You're all set, {{ user_name }}.</h1>
+        <p class="success-copy">Your journey has been successfully stored in the transit booking system.</p>
+
+        <div class="booking-id">BOOKING <strong>#{{ booking_id }}</strong></div>
+
+        <div class="ticket">
+            <div class="ticket-row route-ticket"><div><small>FROM</small><strong>{{ source_name }}</strong></div><span>→</span><div><small>TO</small><strong>{{ destination_name }}</strong></div></div>
+            <div class="ticket-divider"></div>
+            <div class="ticket-row details-ticket"><div><small>TRAVEL TIME</small><strong>{{ travel_time }} min</strong></div><div><small>ESTIMATED FARE</small><strong>₹{{ "%.2f"|format(final_cost) }}</strong></div></div>
+        </div>
+
+        <a class="primary-btn inline-btn" href="/">Plan another journey <span>→</span></a>
+    </section>
+</main>
+<footer class="footer"><strong>Chennai Multi-Modal Transit Route Optimizer</strong><span>Semester III · DSA + DBMS Project</span></footer>
+</body>
+</html>

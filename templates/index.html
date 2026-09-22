@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#07111f">
+    <title>Chennai Transit Optimizer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="app-shell">
+
+<header class="topbar">
+    <a class="brand" href="/" aria-label="Chennai Transit Optimizer home">
+        <span class="brand-mark">CT</span>
+        <span>
+            <strong>Chennai Transit</strong>
+            <small>Route Optimizer</small>
+        </span>
+    </a>
+    <div class="topbar-badge"><span class="status-dot"></span> Multimodal Network</div>
+</header>
+
+<main>
+    <section class="hero">
+        <div class="hero-grid">
+            <div class="hero-copy">
+                <div class="eyebrow">SMART URBAN MOBILITY</div>
+                <h1>Plan your journey.<br><span>Choose the better route.</span></h1>
+                <p>Connect Chennai Metro, Suburban Rail and Bus networks in one simple route planner.</p>
+                <div class="hero-pills">
+                    <span>● MySQL powered</span>
+                    <span>● Dijkstra optimized</span>
+                    <span>● Chennai network</span>
+                </div>
+            </div>
+
+            <div class="hero-visual" aria-hidden="true">
+                <div class="orbit orbit-one"></div>
+                <div class="orbit orbit-two"></div>
+                <div class="map-node node-a">M</div>
+                <div class="map-node node-b">R</div>
+                <div class="map-node node-c">B</div>
+                <div class="map-node node-d">C</div>
+                <div class="route-line line-a"></div>
+                <div class="route-line line-b"></div>
+                <div class="route-line line-c"></div>
+                <div class="hero-card-float">
+                    <span class="float-icon">↗</span>
+                    <div><strong>Optimized</strong><small>route found</small></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="planner-wrap">
+        <div class="planner-card">
+            <div class="section-heading">
+                <div>
+                    <span class="section-kicker">TRIP PLANNER</span>
+                    <h2>Where are you going?</h2>
+                    <p>Select your starting point, destination and optimization preference.</p>
+                </div>
+                <div class="planner-icon">⌁</div>
+            </div>
+
+            <form method="POST" action="/find-route" id="routeForm">
+                <div class="station-grid">
+                    <div class="field-card">
+                        <div class="field-label"><span class="pin pin-start">A</span> Starting station</div>
+                        <select name="source" id="source" required>
+                            <option value="" selected disabled>Choose starting station</option>
+                            {% for station in stations %}
+                            <option value="{{ station.station_id }}">{{ station.name }} · {{ station.mode }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <button class="swap-btn" type="button" id="swapStations" title="Swap stations" aria-label="Swap source and destination">⇄</button>
+
+                    <div class="field-card">
+                        <div class="field-label"><span class="pin pin-end">B</span> Destination station</div>
+                        <select name="destination" id="destination" required>
+                            <option value="" selected disabled>Choose destination station</option>
+                            {% for station in stations %}
+                            <option value="{{ station.station_id }}">{{ station.name }} · {{ station.mode }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+
+                <div class="preference-heading">
+                    <div>
+                        <span class="section-kicker">OPTIMIZATION</span>
+                        <h3>What matters most?</h3>
+                    </div>
+                </div>
+
+                <div class="mode-grid">
+                    <div class="mode-option">
+                        <input type="radio" name="mode" id="fastest" value="fastest" checked>
+                        <label for="fastest">
+                            <span class="mode-icon fastest-icon">⚡</span>
+                            <span><strong>Fastest route</strong><small>Minimize travel time</small></span>
+                            <span class="radio-check">✓</span>
+                        </label>
+                    </div>
+                    <div class="mode-option">
+                        <input type="radio" name="mode" id="cheapest" value="cheapest">
+                        <label for="cheapest">
+                            <span class="mode-icon cheapest-icon">₹</span>
+                            <span><strong>Cheapest route</strong><small>Minimize estimated fare</small></span>
+                            <span class="radio-check">✓</span>
+                        </label>
+                    </div>
+                </div>
+
+                <button class="primary-btn" type="submit" id="findRouteBtn">
+                    <span>Find optimized route</span><span class="btn-arrow">→</span>
+                </button>
+            </form>
+
+            <div class="planner-note">
+                <span>i</span>
+                <p>Routes are calculated from the project's representative Chennai transit dataset. The complete network is evaluated internally before the result is displayed.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="feature-strip">
+        <div class="feature-item"><span class="feature-icon">▦</span><div><strong>Unified network</strong><small>Metro · Rail · Bus</small></div></div>
+        <div class="feature-item"><span class="feature-icon">⌁</span><div><strong>Smart routing</strong><small>Weighted graph search</small></div></div>
+        <div class="feature-item"><span class="feature-icon">▤</span><div><strong>Fare estimate</strong><small>Distance-based model</small></div></div>
+        <div class="feature-item"><span class="feature-icon">✓</span><div><strong>Booking records</strong><small>Stored in MySQL</small></div></div>
+    </section>
+</main>
+
+<footer class="footer">
+    <strong>Chennai Multi-Modal Transit Route Optimizer</strong>
+    <span>Semester III · DSA + DBMS Project</span>
+</footer>
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
