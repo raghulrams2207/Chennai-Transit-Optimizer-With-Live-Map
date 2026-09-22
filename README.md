@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-Sure 👍 Here is the **complete `README.md` file** in one copy-paste block.
-
-````markdown
 # 🚍 Chennai Transit Route Optimizer
 
 A web-based public transportation route optimization system for Chennai that finds an optimized route between two transit stations using **Graph Data Structures and Dijkstra's Algorithm**.
