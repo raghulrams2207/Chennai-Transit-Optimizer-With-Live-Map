@@ -714,6 +714,3 @@ The Chennai Transit Route Optimizer demonstrates how **Data Structures and Algor
 The system stores transit information using MySQL, represents the transit network as a graph, applies Dijkstra's Algorithm to calculate an optimized route, and presents the result through a Flask-based web interface with route visualization and booking functionality.
 
 ````
-=======
-
->>>>>>> 873ca78dd5c0420e5bef05ce3c2a9734bff82ff4
